@@ -137,15 +137,16 @@ def percentile(values, p):
 
 
 def presentation(feats, sorted_feats, keys):
-    sample = {}
-    sample_sorted = {}
+    sample_feats = {}
+    sample_sorted_feats = {}
 
-    for key in keys():
-        sample[key] = feats[key]
-    for key in keys():
-        sample[key] = feats[key]
+    for key in keys:
+        sample_feats[key] = feats[key]
+    for key in keys:
+        sample_sorted_feats[key] = sorted_feats[key]
     for key in keys:
         print_count(sample_feats)
+        print()
         print_mean(sample_feats)
         print()
         print_std(sample_feats)
@@ -171,4 +172,6 @@ if __name__ == "__main__":
 
     keys = list(feats.keys())
     keys_cuted = [keys[i:i+4] for i in range(0, len(keys), 4)]
-    print(keys_cuted)
+    for i in range(0, len(keys_cuted)):
+        presentation(feats, sorted_feats, keys_cuted[i])
+        print()
