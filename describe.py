@@ -1,8 +1,8 @@
 import csv
 
-def open_data():
+def open_data(src):
     try:
-        with open("datasets/dataset_train.csv", "r") as f:
+        with open(src, "r") as f:
             reader = csv.DictReader(f)
             data = list(reader)
     except (OSError, csv.Error):
@@ -167,7 +167,7 @@ def presentation(feats, sorted_feats, keys):
 
 
 if __name__ == "__main__":
-    data = open_data()
+    data = open_data("datasets/dataset_test.csv")
     feats = parse_feats(data)
     sorted_feats = {}
     for key, value in feats.items():
