@@ -37,7 +37,7 @@ plt.title(
 )
 plt.xlabel("Courses")
 plt.ylabel("Scores")
-plt.legend(title="Maisons")
+plt.legend(title="Houses")
 plt.tight_layout()
 
 plt.show()

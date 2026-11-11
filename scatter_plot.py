@@ -36,7 +36,7 @@ sns.scatterplot(
 
 plt.xlabel(f"{max_corr_pair[0]}")
 plt.ylabel(f"{max_corr_pair[1]}")
-plt.legend(title="Maisons")
+plt.legend(title="Houses")
 plt.tight_layout()
 
 plt.show()
