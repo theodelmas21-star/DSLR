@@ -85,7 +85,7 @@ for house in houses:
 
 # Envoie du Resultat dans un fichier JSON
 
-model_data - {
+model_data = {
     "means": means.to_dict(),
     "stds": stds.to_dict(),
     "weights": {}
@@ -95,7 +95,7 @@ model_data - {
 # Il n'est pas pris en compte par JSON, on l'applatit donc en une ligne avec flatten,
 # Un tableau de taille (len(choosen_cols) + 1, ), puis on le passe en liste
 for house, W in weights_dict.items():
-    model_data[weights][house] = W.flatten().tolist()
+    model_data["weights"][house] = W.flatten().tolist()
 
 with open("weights.json", "w") as f:
     json.dump(model_data, f, indent=4)
