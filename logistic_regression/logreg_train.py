@@ -3,7 +3,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sns
 import json
 
 df = pd.read_csv("datasets/dataset_train.csv")
@@ -97,5 +96,5 @@ model_data = {
 for house, W in weights_dict.items():
     model_data["weights"][house] = W.flatten().tolist()
 
-with open("weights.json", "w") as f:
+with open("logistic_regression/weights.json", "w") as f:
     json.dump(model_data, f, indent=4)
