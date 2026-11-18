@@ -38,7 +38,7 @@ h_theta(x) = 1 / (1 + exp(-z))
 - describe.py: A custom implementation of pandas' describe() function. Computes count, mean, std, min, percentiles (25%, 50%, 75%), and max for all numerical features.
 - histogram.py: Plots histograms for each Hogwarts course to discover which course is homogeneous across all houses (e.g., Care of Magical Creatures).
 - scatter_plot.py: Generates a scatter plot to identify two features that are similar / correlated (e.g., Astronomy and Defense Against the Dark Arts).
-- pair_plot.py: Visualizes pairwise relationships across all features using seaborn or matplotlib and save it in 'Correlation between courses.png'.
+- pair_plot.py: Visualizes pairwise relationships across all features using seaborn or matplotlib and save it in 'Pair_plot.png'.
 - logreg_train.py: Implements Gradient Descent with Z-score normalization to iteratively train binary classifiers for each house. Saves the optimal weights into a weights.json file.
 - logreg_predict.py: Loads the trained weights, normalizes the test dataset, computes probabilities for each house, applies the argmax rule, and outputs a houses.csv prediction file.
 - precision.py (or evaluation script): Computes the accuracy and error rate by comparing predictions against ground truth labels.
@@ -59,21 +59,21 @@ pip install numpy pandas matplotlib seaborn
 
 1. Exploratory Data Analysis (describe.py):
 Displays summary statistics for the training dataset.
-python describe.py datasets/dataset_train.csv
+python show_data/describe.py datasets/dataset_train.csv
 
 2. Data Visualization:
 Explore feature distributions and correlations.
-python histogram.py 
-python scatter_plot.py
-python pair_plot.py 
+python show_data/histogram.py 
+python show_data/scatter_plot.py
+python show_data/pair_plot.py 
 
 3. Training the Model (logreg_train.py):
 Trains the logistic regression models using gradient descent and saves weights to weights.json.
-python logreg_train.py datasets/dataset_train.csv
+python logistic_regression/logreg_train.py datasets/dataset_train.csv
 
 4. Predicting Houses (logreg_predict.py):
 Generates house predictions for the test dataset and creates houses.csv.
-python logreg_predict.py datasets/dataset_test.csv weights.json
+python logistic_regression/logreg_predict.py datasets/dataset_test.csv logistic_regression/weights.json
 
 ---
 

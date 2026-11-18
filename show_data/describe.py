@@ -1,4 +1,5 @@
 import csv
+import sys
 
 def open_data(src):
     try:
@@ -167,7 +168,12 @@ def presentation(feats, sorted_feats, keys):
 
 
 if __name__ == "__main__":
-    data = open_data("datasets/dataset_test.csv")
+    if len(sys.argv) != 2:
+        print("Erreur : Fichier invalide ou manquant.")
+        print("Exemple : python describe.py datasets/dataset_train.csv")
+        sys.exit(1)
+    
+    data = open_data(sys.argv[1])
     feats = parse_feats(data)
     sorted_feats = {}
     for key, value in feats.items():

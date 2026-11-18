@@ -27,7 +27,7 @@ g = sns.pairplot(
     plot_kws={"s": 10, "alpha": 0.7}
 )
 
-g.figure.suptitle(f"Correlation between courses", fontsize=16, y=1.02)
+g.figure.suptitle(f"Pair_plot", fontsize=16, y=1.02)
 
 sns.move_legend(g, "center right", bbox_to_anchor=(1.01, 0.5), frameon=True, title="Hogwarts Houses")
 
@@ -35,5 +35,5 @@ for ax in g.axes.flatten():
     ax.set_xlabel(ax.get_xlabel(), rotation=30, ha="right", fontsize=10)
     ax.set_ylabel(ax.get_ylabel(), fontsize=8, rotation=0, ha="right", va="center")
 
-g.savefig(f"Correlation between courses", dpi=150, bbox_inches="tight")
+g.savefig(f"show_data/Pair_plot", dpi=150, bbox_inches="tight")
 plt.close("all")

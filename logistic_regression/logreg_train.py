@@ -6,7 +6,7 @@ import pandas as pd
 import json
 import sys
 
-if len(sys.argv) < 2 or sys.argv[1] != "datasets/dataset_train.csv":
+if len(sys.argv) != 2 or sys.argv[1] != "datasets/dataset_train.csv":
     print("Erreur : Fichier invalide ou manquant.")
     print("Usage attendu : python logreg_train.py datasets/dataset_train.csv")
     sys.exit(1)

@@ -18,6 +18,10 @@ for col in numeric_cols:
     if not max_val - min_val == 0:
         df[col] = (df[col] - min_val) / (max_val - min_val)
 
+
+# On passe du format "large" au format "long", on a plus que 2 colonnes "Courses" "Score"
+# Les matieres sont en lignes
+# "house_col" est comme une 3eme colonne, pour garder le lien et pouvoir les trier par maison avec hue=housecol
 df_melted = df.melt(
     id_vars=[house_col],
     value_vars=numeric_cols,

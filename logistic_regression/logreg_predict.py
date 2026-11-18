@@ -1,8 +1,9 @@
 import json
 import pandas as pd
 import numpy as np
+import sys
 
-if len(sys.argv) < 2 or sys.argv[1] != "datasets/dataset_test.csv" or sys.argv[2] != "logistic_regression/weights.json":
+if len(sys.argv) != 3 or sys.argv[1] != "datasets/dataset_test.csv" or sys.argv[2] != "logistic_regression/weights.json":
     print("Erreur : Fichier invalide ou manquant.")
     print("Usage attendu : python logreg_train.py datasets/dataset_test.csv logistic_regression/weights.json")
     sys.exit(1)
