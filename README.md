@@ -75,10 +75,6 @@ python logreg_train.py datasets/dataset_train.csv
 Generates house predictions for the test dataset and creates houses.csv.
 python logreg_predict.py datasets/dataset_test.csv weights.json
 
-5. Evaluating Precision (precision.py):
-Compares predictions against actual labels to check the model's accuracy.
-python precision.py houses.csv datasets/dataset_truth.csv
-
 ---
 
 ## In-Depth Mathematical Concepts
