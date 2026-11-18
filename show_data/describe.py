@@ -104,6 +104,24 @@ def print_mean(feats):
 # L'écart-type mesure la dispersion (ou la variabilité) des données autour de la moyenne.
 # Un std faible signifie que les valeurs sont très regroupées, très proches de la moyenne.
 # Un std élevé signifie que les valeurs sont très étalées, dispersées sur une large plage de valeurs.
+
+def calcul_variance(value):
+        n = len(value)
+        if n < 2:
+            variance = 0.0
+        else:
+            mean = sum(value) / n
+            variance_sum = sum((v - mean) ** 2 for v in value)
+            variance = variance_sum / (n - 1)
+        return variance
+
+def print_variance(feats):
+    print(f"{'Variance':<{COL_LABEL_WIDTH}}", end="")
+    for value in feats.values():
+        variance = calcul_variance(value)
+        print(f"{variance:>{COL_DATA_WIDTH}.6f}", end="")
+    print()
+
 def print_std(feats):
     print(f"{'Std':<{COL_LABEL_WIDTH}}", end="")
     for value in feats.values():
@@ -111,9 +129,7 @@ def print_std(feats):
         if n < 2:
             res = 0.0
         else:
-            mean = sum(value) / n
-            variance_sum = sum((v - mean) ** 2 for v in value)
-            variance = variance_sum / (n - 1)
+            variance = calcul_variance(value)
             res = variance ** 0.5
         print(f"{res:>{COL_DATA_WIDTH}.6f}", end="")
     print()
@@ -128,6 +144,13 @@ def print_max(feats):
     print(f"{'Max':<{COL_LABEL_WIDTH}}", end="")
     for value in feats.values():
         print(f"{value[-1]:>{COL_DATA_WIDTH}.6f}", end="")
+    print()
+
+def print_range(feats):
+    print(f"{'Range':<{COL_LABEL_WIDTH}}", end="")
+    for value in feats.values():
+        res = value[-1] - value[0]
+        print(f"{res:>{COL_DATA_WIDTH}.6f}", end="")
     print()
 
 def first_quartile(feats):
@@ -165,6 +188,8 @@ def presentation(feats, sorted_feats, keys):
     second_quartile(sample_sorted_feats)
     third_quartile(sample_sorted_feats)
     print_max(sample_sorted_feats)
+    print_variance(sample_feats)
+    print_range(sample_sorted_feats)
 
 
 if __name__ == "__main__":
