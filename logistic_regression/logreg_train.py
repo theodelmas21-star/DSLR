@@ -4,8 +4,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import json
+import sys
 
-df = pd.read_csv("datasets/dataset_train.csv")
+if len(sys.argv) < 2 or sys.argv[1] != "datasets/dataset_train.csv":
+    print("Erreur : Fichier invalide ou manquant.")
+    print("Usage attendu : python logreg_train.py datasets/dataset_train.csv")
+    sys.exit(1)
+
+train_path = sys.argv[1]
+
+df = pd.read_csv(train_path)
 
 house_col = "Hogwarts House"
 

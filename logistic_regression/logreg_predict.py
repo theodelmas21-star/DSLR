@@ -2,7 +2,12 @@ import json
 import pandas as pd
 import numpy as np
 
-df_test = pd.read_csv("datasets/dataset_test.csv")
+if len(sys.argv) < 2 or sys.argv[1] != "datasets/dataset_test.csv" or sys.argv[2] != "logistic_regression/weights.json":
+    print("Erreur : Fichier invalide ou manquant.")
+    print("Usage attendu : python logreg_train.py datasets/dataset_test.csv logistic_regression/weights.json")
+    sys.exit(1)
+
+df_test = pd.read_csv(sys.argv[1])
 
 choosen_cols = [
     "Astronomy",
@@ -18,7 +23,7 @@ choosen_cols = [
 
 df_test[choosen_cols] = df_test[choosen_cols].fillna(df_test[choosen_cols].mean())
 
-with open("logistic_regression/weights.json", "r") as f:
+with open(sys.argv[2], "r") as f:
     data = json.load(f)
 
 means_dict = data["means"]
