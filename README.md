@@ -1,10 +1,10 @@
 # DSLR (Data Science Logistic Regression)
 
-    Implementation of a Multi-Class Logistic Regression model from scratch in Python for Hogwarts House prediction, including multiple gradient descent optimizers and convergence visualization as bonus features.
+  Implementation of a Multi-Class Logistic Regression model from scratch in Python for Hogwarts House prediction, including multiple gradient descent optimizers and convergence visualization as bonus features.
 
 # Description
 
-    > A comprehensive data science project from the 42 curriculum. It introduces Exploratory Data Analysis (EDA) and implements a One-vs-All Logistic Regression classifier from scratch in Python—without external ML training libraries like Scikit-Learn.
+  A comprehensive data science project from the 42 curriculum. It introduces Exploratory Data Analysis (EDA) and implements a One-vs-All Logistic Regression classifier from scratch in Python—without external ML training libraries like Scikit-Learn.
   The project explores data visualization, standardization, cost functions, gradient descent optimization, classification metrics, and bonus optimizer comparisons.
 
 ---
