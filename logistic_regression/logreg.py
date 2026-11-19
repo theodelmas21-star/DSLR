@@ -41,7 +41,7 @@ class Logreg:
                     # X[i] renverrait la ligne de notes de l'eleves comme un tableau 1D
                     # Dans _update_weights, X.shape[0] vaudrait alors le nombre de colonnes au lieu du nombre de lignes
                     # Cela nous permet de couper (slice) dans le tableau afin d'indiquer X.shape[0] = 1 (1 ligne du tableau) | X.shape[1] = n_features
-                    _update_weights(X[i:i+1], y[i:i+1])
+                    self._update_weights(X[i:i+1], y[i:i+1])
             elif self.optimizer == "mbsgd" or self.optimizer == "minibatch":
                 indices = np.random.permutation(m)
                 for start in range(0, m, self.batch_size):
