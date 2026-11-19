@@ -1,4 +1,4 @@
-import numpy as numpy
+import numpy as np
 
 class Logreg:
     def __init__(self, alpha=0.01, epochs=1000, optimizer="batch", batch_size=32):
@@ -19,7 +19,7 @@ class Logreg:
         z = np.dot(X, self.weights)
         predictions = 1 / (1 + np.exp(-z))
         gradient = np.dot(X.T, (predictions - y)) / m
-        self.weights -= alpha * gradient
+        self.weights -= self.alpha * gradient
 
     def fit(self, X, y):
         # m = lignes de X
