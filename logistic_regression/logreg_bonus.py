@@ -4,7 +4,7 @@ import pandas as pd
 import json
 from logreg import Logreg
 
-def logreg_train_predict(falpha=0.01, fepochs=1000, foptimizer="batch", fbatch_size=32, filename="logistic_regression/batch.csv"):
+def logreg_train_predict(falpha=0.9, fepochs=1000, foptimizer="batch", fbatch_size=32, filename="logistic_regression/batch.csv"):
     df = pd.read_csv("datasets/dataset_train.csv")
 
     house_col = "Hogwarts House"
