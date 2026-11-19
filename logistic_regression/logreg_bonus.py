@@ -4,7 +4,7 @@ import pandas as pd
 import json
 from logreg import Logreg
 
-def logreg_train_predict(falpha=0.9, fepochs=1000, foptimizer="batch", fbatch_size=32, filename="logistic_regression/batch.csv"):
+def logreg_train_predict(houses, falpha=0.9, fepochs=1000, foptimizer="batch", fbatch_size=32, filename="logistic_regression/batch.csv"):
     df = pd.read_csv("datasets/dataset_train.csv")
 
     house_col = "Hogwarts House"
@@ -19,13 +19,6 @@ def logreg_train_predict(falpha=0.9, fepochs=1000, foptimizer="batch", fbatch_si
         "Transfiguration",
         "Charms",
         "Flying"
-    ]
-
-    houses = [
-        "Gryffindor",
-        "Slytherin",
-        "Ravenclaw",
-        "Hufflepuff"
     ]
 
     for col in choosen_cols:
@@ -73,20 +66,32 @@ def logreg_train_predict(falpha=0.9, fepochs=1000, foptimizer="batch", fbatch_si
 
     return loss_histories
 
-batch_loss = logreg_train_predict(foptimizer="batch")
-minibatch_loss = logreg_train_predict(falpha=0.05, fepochs=200, foptimizer="minibatch", fbatch_size=32, filename="logistic_regression/minibatch.csv")
-sgd_loss = logreg_train_predict(falpha=0.01, fepochs=60, foptimizer="sgd", filename="logistic_regression/sgd.csv")
+houses = [
+        "Gryffindor",
+        "Slytherin",
+        "Ravenclaw",
+        "Hufflepuff"
+    ]
 
-target_house = "Gryffindor"
+batch_loss = logreg_train_predict(houses, foptimizer="batch")
+minibatch_loss = logreg_train_predict(houses, falpha=0.05, fepochs=200, foptimizer="minibatch", fbatch_size=32, filename="logistic_regression/minibatch.csv")
+sgd_loss = logreg_train_predict(houses, falpha=0.01, fepochs=60, foptimizer="sgd", filename="logistic_regression/sgd.csv")
 
-plt.figure(figsize=(8,4))
-plt.plot(batch_loss[target_house], label="batch(1000 epochs)")
-plt.plot(minibatch_loss[target_house], label="minibatch(200 epochs)")
-plt.plot(sgd_loss[target_house], label="sgd(60 epochs)")
+# Creer un graphique de 2 colonnes et 2 lignes, soit 4 sous graphiques, figsize donne la taille globale
+fig, axes = plt.subplots(2, 2, figsize=(11, 7))
 
-plt.title(f"Evolution de la loss - {target_house}")
-plt.xlabel("Epoque")
-plt.ylabel("Binary Cross-Entropy")
-plt.legend()
-plt.grid(True, alpha=0.3)
+# Applatit axes en une ligne (2, 2) -> (4, )
+axes = axes.ravel()
+
+for ax, house in zip(axes, houses):
+    ax.plot(batch_loss[house], label="batch")
+    ax.plot(minibatch_loss[house], label="minibatch")
+    ax.plot(sgd_loss[house], label="sgd")
+    ax.set_title(house)
+    ax.set_xlabel("Époque")
+    ax.set_ylabel("Loss")
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
 plt.show()
