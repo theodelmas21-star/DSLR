@@ -44,6 +44,7 @@ def logreg_train_predict(falpha=0.01, fepochs=1000, foptimizer="batch", fbatch_s
     X = np.hstack((bias_column, X_features))
 
     models = {}
+    loss_histories = {}
 
     for house in houses:
         y = (df[house_col] == house).astype(int).values.reshape(-1, 1)
@@ -51,6 +52,7 @@ def logreg_train_predict(falpha=0.01, fepochs=1000, foptimizer="batch", fbatch_s
         clf = Logreg(alpha=falpha, epochs=fepochs, optimizer=foptimizer, batch_size=fbatch_size)
         clf.fit(X, y)
         models[house] = clf
+        loss_histories[house] = clf.loss_history
 
     probas_list = [models[house].predict_proba(X) for house in houses]
     probas_matrix = np.column_stack(probas_list)
@@ -69,7 +71,22 @@ def logreg_train_predict(falpha=0.01, fepochs=1000, foptimizer="batch", fbatch_s
     print(f"Accuracy : {accuracy:.2%}")
     print()
 
+    return loss_histories
 
-logreg_train_predict(foptimizer="batch")
-logreg_train_predict(falpha=0.05, fepochs=200, foptimizer="minibatch", fbatch_size=32, filename="logistic_regression/minibatch.csv")
-logreg_train_predict(falpha=0.01, fepochs=60, foptimizer="sgd", filename="logistic_regression/sgd.csv")
+batch_loss = logreg_train_predict(foptimizer="batch")
+minibatch_loss = logreg_train_predict(falpha=0.05, fepochs=200, foptimizer="minibatch", fbatch_size=32, filename="logistic_regression/minibatch.csv")
+sgd_loss = logreg_train_predict(falpha=0.01, fepochs=60, foptimizer="sgd", filename="logistic_regression/sgd.csv")
+
+target_house = "Gryffindor"
+
+plt.figure(figsize=(8,4))
+plt.plot(batch_loss[target_house], label="batch(1000 epochs)")
+plt.plot(minibatch_loss[target_house], label="minibatch(200 epochs)")
+plt.plot(sgd_loss[target_house], label="sgd(60 epochs)")
+
+plt.title(f"Evolution de la loss - {target_house}")
+plt.xlabel("Epoque")
+plt.ylabel("Binary Cross-Entropy")
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()

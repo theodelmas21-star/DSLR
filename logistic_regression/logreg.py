@@ -18,11 +18,11 @@ class Logreg:
     def _update_weights(self, X, y):
         m = X.shape[0]
         z = np.dot(X, self.weights)
-        predictions = 1 / (1 + np.exp(-z))
+        predictions = self._sigmoid(z)
         gradient = np.dot(X.T, (predictions - y)) / m
         self.weights -= self.alpha * gradient
 
-    def _compute_loss(X, y):
+    def _compute_loss(self, X, y):
         # On maintient la proba entre 0.0000...01 (1e-15) et 0.9999...99 (1 - 1e-15)
         # On evite ainsi de diviser par 0 si le modele est sur a 100%
         y_pred = np.clip(self.predict_proba(X), 1e-15, 1 - 1e-15)
@@ -49,6 +49,7 @@ class Logreg:
         # n_features = colonnes de X
         m, n_features = X.shape
         self.weights = np.zeros(n_features)
+        self.loss_history = []
         
         # Transforme y en un tableau (x, ) de la bonne taille (-1 = la fonction trouve la bonne taille elle meme)
         y = y.reshape(-1)
@@ -74,9 +75,9 @@ class Logreg:
             else:
                 raise ValueError(f"Optimizer not supported : {self.optimizer}")
 
-                self.loss_history.append(self._compute_loss(X, y))
+            self.loss_history.append(self._compute_loss(X, y))
 
-            return self
+        return self
 
     def predict_proba(self, X):
         z = np.dot(X, self.weights)
