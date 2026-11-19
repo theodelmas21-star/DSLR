@@ -42,8 +42,17 @@ class Logreg:
                     # Dans _update_weights, X.shape[0] vaudrait alors le nombre de colonnes au lieu du nombre de lignes
                     # Cela nous permet de couper (slice) dans le tableau afin d'indiquer X.shape[0] = 1 (1 ligne du tableau) | X.shape[1] = n_features
                     _update_weights(X[i:i+1], y[i:i+1])
+            elif self.optimizer == "mbsgd" or self.optimizer == "minibatch":
+                indices = np.random.permutation(m)
+                for start in range(0, m, self.batch_size):
+                    # on part de start, pour faire une tranche jusqu'a start + batch size
+                    idx = indices[start:start + self.batch_size]
+                    self._update_weights(X[idx], y[idx])
+            else:
+                raise ValueError(f"Optimizer not supported : {self.optimizer}")
+
+            return self
 
     def predict_proba(self, X):
-
-    
-    def predict(self, X):
+        z = np.dot(X, self.weights)
+        return self._sigmoid(z)
